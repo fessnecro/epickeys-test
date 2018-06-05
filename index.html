@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EpicKeys</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <form>
+        <label for="mmr-start">Start</label><input id="mmr-start" type="text" />
+        <label for="mmr-end">End</label><input id="mmr-end" type="text" />
+        <input id="mmr-calculate" type="submit" value="Calculate" />
+        <br />
+        <span id="mmr-result"></span>
+    </form>
+<script>
+    $(function () {
+        $('#mmr-calculate').click(function(e) {
+            var start = $('#mmr-start').val();
+            var end = $('#mmr-end').val();
+
+            $.get('/api/calculate.php', {start: start, end: end},function (data) {
+                $('#mmr-result').html("Result: " + data);
+            });
+            e.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>
